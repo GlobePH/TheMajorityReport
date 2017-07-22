@@ -7,10 +7,16 @@ var _ = require('lodash');
 var fs = require('fs');
 var moment = require('moment');
 
-
+////////////////
+// Middleware //
+////////////////
 
 app.use(express.static('public'));
 app.use(bodyParser.json());
+
+////////////////////
+// REST endpoints //
+////////////////////
 
 app.get('/', function(req, res) {
 	res.sendFile(__dirname + '/users.html');
@@ -20,33 +26,9 @@ app.get('/company', function(req, res) {
 	res.sendFile(__dirname + '/company.html');
 });
 
-///////////////////
-// Google Trends //
-///////////////////
-
-
-
-// googleTrends.interestOverTime({keyword: 'Valentines Day'})
-// .then((res) => {
-//   console.log('this is res', res);
-// })
-// .catch((err) => {
-//   console.log('got the error', err);
-//   console.log('error message', err.message);
-//   console.log('request body',  err.requestBody);
-// });
-
-
-
-
-///////////////
-// Socket.io //
-///////////////
-
-const googleTranslate = require('google-translate')('AIzaSyBZDwncw2ToOYTwlG4qmHUejDvWFFN6XSc');
-const onlineUsers = {};
-const translationCache = [];
-const googleTrends = require('google-trends-api');
+/////////////
+// Sockets //
+/////////////
 
 io.sockets.on('connection', function (socket) {
 	var uid;
@@ -212,6 +194,7 @@ io.sockets.on('connection', function (socket) {
 ////////////
 // Listen //
 ////////////
+
 http.listen(5000, function(){
 	console.log('Hello! listening on *:5000');
 });
