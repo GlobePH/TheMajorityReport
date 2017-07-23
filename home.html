@@ -1,0 +1,127 @@
+<!-- put HTML for users here -->
+<!DOCTYPE html>
+<html>
+<head>
+
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+	<!-- Custom CSS Stylesheet -->
+	<link rel="stylesheet" type="text/css" href="/users/css/main.css">
+
+	<title>The Majority Report</title>
+
+</head>
+<body>
+
+</head>
+<body>
+
+	<div id="app">
+		<nav>
+		    <div class="nav-wrapper dark-primary-color">
+		    	<a href="#" class="brand-logo">The Majority Report</a>
+		    	<ul id="nav-mobile" class="right hide-on-med-and-down">
+			        <!-- <li><a v-show="user && Object.keys(user).length > 0" href="#" @click="logout">Logout</a></li>
+			        <li><a v-show="user && Object.keys(user).length > 0" href="#">User</a></li> -->
+		      	</ul>
+		    </div>
+		</nav>
+
+		<div class="container">
+			<div v-show="activePage == 'company'" class="row">
+
+				<div class="col s12">
+					<h5>Report an Issue</h5>	
+				</div>
+				<div v-for="(c, key) in companies" class="col s12 m4">
+					<!-- <a :href="'#modal'+key" class="modal-trigger"> -->
+					<a :href="'/company/'+c.code">
+						<div class="card">
+							<div class="card-image">
+								<div style="background-image: url('c.logo')"></div>
+							  	<img :src="c.logo" class="logo-style">
+							</div>
+							<div class="card-content">
+								<span class="card-title" v-text="c.name"></span>
+							</div>
+							<!-- <div class="card-action">
+							  	<a :href="'#modal'+key" class="modal-trigger">Report</a>
+							</div> -->
+						</div>
+					</a>
+					<div :id="'modal'+key" class="modal">
+					    <div class="modal-content">
+					    	<h4>Report Issue to {{ c.name }}</h4>
+					    	<label>Additional Information (optional)</label>
+	          				<textarea class="materialize-textarea"></textarea>
+					    </div>
+					    <div class="modal-footer">
+					      	<button class="waves-effect waves-light btn default-primary-color">Submit Report</button>
+					    </div>
+					</div>
+				</div>
+
+				<div class="col s12">
+					
+					<div class="card about">
+						<div class="card-content">
+							<div class="card-title">About The Majority Report</div>
+							
+							<p>The Majority Report gives a platform for everyday citizens to practice vigilance and social responsibility. The Majority Report app is a 2-kind platform: where companies can engage with their users, and where public offices gets closer to their citizens.</p><br>
+
+							<p>Companies with large customer base can use the platform to engage with their customers. When a user reports a concern to the company concerned, the company is updated real time on the issue. Over time, companies can use this data to prevent such incidences, reinstilling customer trust on them.  </p><br>
+
+							<p>For the public, citizens can report incidences as they happen. From theft, sexual offense, or violent crimes -- reports such as these are important as they give more information to the police and concerned parties into making a safer place for everyone to live in. </p><br>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- <div v-show="activePage == 'report'" class="row">
+				<h5>Report the Issue to 'CompanyName'</h5>
+				<div class="card">
+					<div class="card-content">
+						<div class="row">
+							<div class="col s6">
+								<h6>Recent Issues</h6>
+								<div v-for="c in recentIssues" class="chip">
+								    <span v-text="c.name"></span>
+								    <i class="close material-icons">close</i>
+								</div>
+							</div>
+							<div class="col s6">
+								<div class="input-field col s12">
+						          	<textarea class="materialize-textarea"></textarea>
+						          	<label>Add more information about the issue</label>
+						        </div>
+							</div>
+						</div>
+					</div>
+					<div class="card-action center">
+						<a class="waves-effect waves-light btn default-primary-color">Submit Report</a>
+					</div>
+				</div>
+			</div> -->
+		</div>
+	</div>
+
+	<script src="https://www.gstatic.com/firebasejs/4.1.3/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/4.1.3/firebase-auth.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/4.1.3/firebase-database.js"></script>
+	<script>
+	  // Initialize Firebase
+	  var config = {
+	    apiKey: "AIzaSyD3YYD0J-xgEFoOOpsRcwY0gELo2NnVe4o",
+	    authDomain: "majority-report-ca4ad.firebaseapp.com",
+	    databaseURL: "https://majority-report-ca4ad.firebaseio.com",
+	    projectId: "majority-report-ca4ad",
+	    storageBucket: "majority-report-ca4ad.appspot.com",
+	    messagingSenderId: "785368931640"
+	  };
+	  firebase.initializeApp(config);
+	</script>
+	<script type="text/javascript" src="/users/js/home.js"></script>
+
+
+</body>
+</html>

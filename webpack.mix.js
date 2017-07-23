@@ -11,10 +11,14 @@ const { mix } = require('laravel-mix');
  |
  */
 
-mix.js('js/users/main.js', 'public/js/users')
-	.js('js/company/main.js', 'public/js/company')
+mix.js('js/users/home.js', 'public/users/js')
+   .js('js/users/report.js', 'public/users/js')
+   .js('js/admin/admin.js', 'public/admin/js')
+	.js('js/company/main.js', 'public/company/js')
+   .sass('css/users/main.scss', 'public/users/css')
+   .sass('css/company/main.scss', 'public/company/css')
    	.browserSync({
-   		proxy: 'localhost:5000',
+   		proxy: 'localhost:5001',
    	  	port: '8080',
    	  	files: [
    	  		'*',

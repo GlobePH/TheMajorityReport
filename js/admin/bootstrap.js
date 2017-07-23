@@ -8,5 +8,3 @@ window.Vue = require('vue');
 window.axios = require('axios');
 
 window._ = require('lodash');
-
-window.moment = require('moment');

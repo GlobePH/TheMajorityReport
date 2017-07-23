@@ -1,0 +1,114 @@
+<!-- put HTML for admin here -->
+<!DOCTYPE html>
+<html>
+<head>
+
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+
+	<!-- Custom CSS Stylesheet -->
+	<link rel="stylesheet" type="text/css" href="/users/css/main.css">
+
+	<title>The Majority Report</title>
+
+</head>
+<body>
+
+	<div id="app">
+		<nav>
+		    <div class="nav-wrapper dark-primary-color">
+		    	<div class="brand-logo primary-text-color">The Majority Report</div>
+		    	<ul id="nav-mobile" class="right hide-on-med-and-down">
+		    		<li><a href="/">Home</a></li>
+		    		<li><a v-show="user && Object.keys(user).length > 0" href="#"><span v-text="this.user.displayName"></span></a></li>
+			        <li><a v-show="user && Object.keys(user).length > 0" href="#" @click="logout">Logout</a></li>
+			        <li><a v-show="!user || Object.keys(user).length == 0" href="#" @click="switchToPage('login')">Log In</a></li>
+		      	</ul>
+		    </div>
+		</nav>
+
+		<div class="container">
+			<div v-show="activePage == 'admin'">
+				<h5>Table of Companies
+				<a class="right btn-floating waves-effect waves-light red" @click="switchToPage('form')"><i class="material-icons">add</i></a></h5>
+				<table class="striped centered" style="width:100%">
+			        <thead>
+			          <tr>
+			              <th width="30%">Logo</th>
+			              <th width="25%">Name</th>
+			              <th width="25%">Code</th>
+			              <th width="10%"></th>
+			              <th width="10%"></th>
+			          </tr>
+			        </thead>
+
+			        <tbody>
+			          <tr v-for="(c, key) in companies">
+			            <td><img :src="c.logo" class="img-table"></td>
+			            <td v-text="c.name"></td>
+			            <td v-text="c.code"></td>
+			            <td><a class="btn-floating waves-effect waves-light" @click="editCompany(c, key)"><i class="material-icons">mode_edit</i></a></td>
+			            <td><a class="btn-floating waves-effect waves-light red"><i class="material-icons" @click="deleteCompany(c, key)">delete</i></a></td>
+			          </tr>
+			        </tbody>
+			      </table>
+			</div>
+
+			<div v-show="activePage == 'login'" class="row">
+				<div class="col s4 offset-s4 center">
+					<button class="btn fb-login login-btn" @click="loginWithFacebook">Login with Facebook</button>
+					<br/>
+					<button class="btn google-login login-btn" @click="loginWithGoogle">Login with Google</button>
+					<br/>
+					<button class="btn twitter-login login-btn" @click="loginWithTwitter">Login with Twitter</button>
+				</div>
+			</div>
+
+			<div v-show="activePage == 'form'">
+				<h5>Add Company</h5>
+				<div class="row">
+				    <div class="input-field col s6">
+				      	<input type="text" name="name" class="validate" v-model="company.name">
+				      	<label class="active">Company Name</label>
+				    </div>
+				    
+				    <div class="file-field input-field col s6">
+					    <input class="validate" type="text" v-model="company.logo">
+					    <label class="active">Logo (URL)</label>
+				    </div>
+
+				    <div class="input-field col s6">
+				      	<input type="text" name="name" class="validate" v-model="company.code">
+				      	<label class="active">Code</label>
+				    </div>
+				</div>
+
+				<div class="row">
+					<div class="col s2">
+						<button class="waves-effect waves-light btn default-primary-color" @click="syncToDb">Submit</button>
+					</div>
+				</div>	
+			</div>
+		</div>
+	</div>
+
+	<script src="https://www.gstatic.com/firebasejs/4.1.3/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/4.1.3/firebase-auth.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/4.1.3/firebase-database.js"></script>
+	<script>
+	  // Initialize Firebase
+	  var config = {
+	    apiKey: "AIzaSyD3YYD0J-xgEFoOOpsRcwY0gELo2NnVe4o",
+	    authDomain: "majority-report-ca4ad.firebaseapp.com",
+	    databaseURL: "https://majority-report-ca4ad.firebaseio.com",
+	    projectId: "majority-report-ca4ad",
+	    storageBucket: "majority-report-ca4ad.appspot.com",
+	    messagingSenderId: "785368931640"
+	  };
+	  firebase.initializeApp(config);
+	</script>
+	<script type="text/javascript" src="/admin/js/admin.js"></script>
+
+</body>
+</html>
